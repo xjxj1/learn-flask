@@ -44,6 +44,7 @@
 
 from flask import Flask, render_template
 from flask import make_response
+from util import is_isbn_or_key
 
 app = Flask(__name__)
 
@@ -73,19 +74,38 @@ def index():
     return render_template('test.html', user=user, movies=movies)
 
 
-@app.route('/hello')
-def hello():
-    # 探讨flask视图函数的返回
-
-
-    headers = {
-        'content-type': 'text/plain',
-        'location': 'http://www.baidu.com'
-
-    }
-    response = make_response('<html></html>', 301)
-    response.headers = headers
-
-    return response
+# @app.route('/hello')
+# def hello():
+#     # 探讨flask视图函数的返回
+#
+#
+#     headers = {
+#         'content-type': 'text/plain',
+#         'location': 'http://www.baidu.com'
+#
+#     }
+#     # response = make_response('<html></html>', 301)
+#     # response.headers = headers
+#     #
+#     # return response
+#     # 常用的方式
+#     return '<html></html>', 301, headers
 
 # app.add_url_rule('/hello', view_func=hello)
+
+# 获取URL参数方式1
+# 调用外部API
+@app.route('/book/search/<q>/<page>')
+def search(q, page):
+    '''
+
+    :param q: 普通关键字 isbn
+    :param page:
+    :return:
+
+    isbn13 --> 13个0到9的数字组成
+    isbn10 --> 10个0到9的数字组成，含有一些 '-'
+    '''
+    isbn_or_key = is_isbn_or_key(q)
+
+    pass
