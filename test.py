@@ -41,10 +41,12 @@
 # @app.route('/hello')
 # def say_hello():
 #     return '<h1> hello flask!!!!!!</h1>'
+import json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask import make_response
 from util import is_isbn_or_key
+from yushu import YuShuBook
 
 app = Flask(__name__)
 
@@ -107,5 +109,11 @@ def search(q, page):
     isbn10 --> 10个0到9的数字组成，含有一些 '-'
     '''
     isbn_or_key = is_isbn_or_key(q)
+    if isbn_or_key == 'isbn':
+        result = YuShuBook.search_by_isbn(q)
+    else:
+        result = YuShuBook.search_by_keyword(q)
+    # dict 序列化
+    return jsonify(result)
+    # return json.dumps(result), 200, {'content-type': 'application/json'}
 
-    pass
