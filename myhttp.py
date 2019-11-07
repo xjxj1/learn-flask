@@ -2,7 +2,7 @@
 # @Time    : 2019-11-06 16:23
 # @Author  : wxl
 # @Site    : 
-# @File    : http.py
+# @File    : myhttp.py
 # @Software: PyCharm
 
 import requests
