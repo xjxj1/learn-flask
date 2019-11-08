@@ -5,7 +5,7 @@
 # @File    : yushu.py
 # @Software: PyCharm
 
-from myhttp import HTTP
+from app.libs.myhttp import HTTP
 from flask import current_app
 
 class YuShuBook:

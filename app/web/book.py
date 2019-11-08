@@ -7,9 +7,8 @@
 from flask import jsonify, request
 # 循环引用
 # from test import app
-from flask import Blueprint
-from util import is_isbn_or_key
-from yushu import YuShuBook
+from app.libs.util import is_isbn_or_key
+from app.spider.yushu import YuShuBook
 from app.web import web
 from app.forms.book import SearchForm
 
